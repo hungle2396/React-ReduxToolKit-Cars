@@ -1,6 +1,5 @@
 interface CarProps {
-    id: any,
+    id?: any,
     name: string,
     cost: number,
-    // onDelete: () => void;
 }

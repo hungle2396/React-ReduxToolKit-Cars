@@ -4,29 +4,31 @@ const carsSlice = createSlice({
     name: "car",
     initialState: {
         searchTerm: "",
-        cars: [] as CarProps[]
+        data: [] as CarProps[]
     },
     reducers: {
-        changeTerm(state, action: PayloadAction<string>) {
+        changeSearchTerm(state, action: PayloadAction<string>) {
             state.searchTerm = action.payload;
         },
         addCar(state, action: PayloadAction<CarProps>) {
-            state.cars.push({
+            state.data.push({
                 id: nanoid(),
                 name: action.payload.name,
                 cost: action.payload.cost
             });
         },
-        deleteCar(state, action: PayloadAction<CarProps>) {
-            const updated = state.cars.filter((car: CarProps) => {
-                return car.name !== action.payload.name;
+        removeCar(state, action: PayloadAction<CarProps>) {
+            console.log(`In the remove Car, id is ${action.payload}`);
+
+            const updated = state.data.filter((car: CarProps) => {
+                return car.id !== action.payload;
             });
 
-            state.cars = updated;
+            state.data = updated;
         }
     }
 });
 
-export const { changeTerm, addCar, deleteCar } = carsSlice.actions;
+export const { changeSearchTerm, addCar, removeCar } = carsSlice.actions;
 
 export const carsReducer = carsSlice.reducer;
